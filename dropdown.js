@@ -44,7 +44,7 @@ function generateDropDownPairs() {
   removing visibility of the 'dropdown data' and only making it visible when 
   the 'dropdown button' is clicked
 */
-function activateDropdowns() {
+function activateAllDropdowns() {
   let dropdownBtn;
   let dropdownData;
   for (let i = 0; i < dropdownPairs.length; i++) {
@@ -61,4 +61,4 @@ function activateDropdowns() {
   }
 }
 
-export { generateDropDownPairs, activateDropdowns };
+export { generateDropDownPairs, activateAllDropdowns };

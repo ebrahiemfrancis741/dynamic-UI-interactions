@@ -1,4 +1,4 @@
-import { activateDropdowns, generateDropDownPairs } from "./dropdown.js";
+import { activateAllDropdowns, generateDropDownPairs } from "./dropdown.js";
 
 generateDropDownPairs();
-activateDropdowns();
+activateAllDropdowns();
