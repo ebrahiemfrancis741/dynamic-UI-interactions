@@ -10,8 +10,8 @@ const dropdownPairs = [];
   get all elements with 'ebs-ddd-btn' and 'ebs-dd-data' custom attributes.
 */
 function getDropDownComponents() {
-  let dropDownBtnList = document.querySelectorAll(`[ebs-dd-btn]`);
-  let dropDownDataList = document.querySelectorAll(`[ebs-dd-data]`);
+  let dropDownBtnList = document.querySelectorAll(`[data-ebs-dd-btn]`);
+  let dropDownDataList = document.querySelectorAll(`[data-ebs-dd-data]`);
   return { dropDownBtnList, dropDownDataList };
 }
 
@@ -26,9 +26,9 @@ function generateDropDownPairs() {
   for (let i = 0; i < dropdownComponents.dropDownBtnList.length; i++) {
     for (let j = 0; j < dropdownComponents.dropDownDataList.length; j++) {
       dropdownBtnAttrValue =
-        dropdownComponents.dropDownBtnList[i].getAttribute(`ebs-dd-btn`);
+        dropdownComponents.dropDownBtnList[i].getAttribute(`data-ebs-dd-btn`);
       dropdownDataAttrValue =
-        dropdownComponents.dropDownDataList[j].getAttribute(`ebs-dd-data`);
+        dropdownComponents.dropDownDataList[j].getAttribute(`data-ebs-dd-data`);
       if (dropdownBtnAttrValue == dropdownDataAttrValue) {
         dropdownPairs.push({
           dropdownBtn: dropdownComponents.dropDownBtnList[i],
