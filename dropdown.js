@@ -31,12 +31,34 @@ function generateDropDownPairs() {
         dropdownComponents.dropDownDataList[j].getAttribute(`ebs-dd-data`);
       if (dropdownBtnAttrValue == dropdownDataAttrValue) {
         dropdownPairs.push({
-          dropDownBtn: dropdownComponents.dropDownBtnList[i],
-          dropDownData: dropdownComponents.dropDownDataList[j],
+          dropdownBtn: dropdownComponents.dropDownBtnList[i],
+          dropdownData: dropdownComponents.dropDownDataList[j],
         });
       }
     }
   }
 }
 
-export { generateDropDownPairs };
+/*
+  This makes the DOM element pairs in dropdownPairs a dropdown element by 
+  removing visibility of the 'dropdown data' and only making it visible when 
+  the 'dropdown button' is clicked
+*/
+function activateDropdowns() {
+  let dropdownBtn;
+  let dropdownData;
+  for (let i = 0; i < dropdownPairs.length; i++) {
+    dropdownBtn = dropdownPairs[i].dropdownBtn;
+    dropdownData = dropdownPairs[i].dropdownData;
+    dropdownData.style.visibility = "hidden";
+    dropdownBtn.addEventListener("click", function (e) {
+      if (dropdownData.style.visibility == "hidden") {
+        dropdownData.style.visibility = "visible";
+      } else {
+        dropdownData.style.visibility = "hidden";
+      }
+    });
+  }
+}
+
+export { generateDropDownPairs, activateDropdowns };

@@ -1,3 +1,4 @@
-import { generateDropDownPairs } from "./dropdown.js";
+import { activateDropdowns, generateDropDownPairs } from "./dropdown.js";
 
 generateDropDownPairs();
+activateDropdowns();
