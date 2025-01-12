@@ -31,6 +31,8 @@ header {
   }
 
   > div.nav-links {
+    display: flex;
+    gap: 8px;
     > div.nav-item {
       position: relative;
       > button[data-ebs-dd-btn] {
