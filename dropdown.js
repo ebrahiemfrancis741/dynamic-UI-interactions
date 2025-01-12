@@ -40,25 +40,27 @@ function generateDropDownPairs() {
 }
 
 /*
-  This makes the DOM element pairs in dropdownPairs a dropdown element by 
-  removing visibility of the 'dropdown data' and only making it visible when 
-  the 'dropdown button' is clicked
+  Applys dropdown functionality to all discovered 'dropdown pairs'
 */
 function activateAllDropdowns() {
-  let dropdownBtn;
-  let dropdownData;
   for (let i = 0; i < dropdownPairs.length; i++) {
-    dropdownBtn = dropdownPairs[i].dropdownBtn;
-    dropdownData = dropdownPairs[i].dropdownData;
-    dropdownData.style.visibility = "hidden";
-    dropdownBtn.addEventListener("click", function (e) {
-      if (dropdownData.style.visibility == "hidden") {
-        dropdownData.style.visibility = "visible";
-      } else {
-        dropdownData.style.visibility = "hidden";
-      }
-    });
+    activateDropdown(dropdownPairs[i]);
   }
+}
+
+/*
+  Apply dropdown functionality to the specified 'dropdown pair'.
+  dropdownPair = {(dropdown Button), (dropdown Data)}
+*/
+function activateDropdown(dropdownPair) {
+  dropdownPair.dropdownData.style.visibility = "hidden";
+  dropdownPair.dropdownBtn.addEventListener("click", function (e) {
+    if (dropdownPair.dropdownData.style.visibility == "hidden") {
+      dropdownPair.dropdownData.style.visibility = "visible";
+    } else {
+      dropdownPair.dropdownData.style.visibility = "hidden";
+    }
+  });
 }
 
 export { generateDropDownPairs, activateAllDropdowns };
