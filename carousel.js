@@ -122,6 +122,12 @@ function getAllCarouselImageIDs() {
   return carouselIDs;
 }
 
+/*
+  Get all unique indicatos 'ID's found (the values of the different custom 
+  'data-ebs-carousel-indicators' attributes). Unique means there are no duplicate IDs 
+  in the returned array. All carousel elements that supposed to be grouped together 
+  share the same value (ID).  
+*/
 function getAllCarouselIndicatorIDs() {
   const carouselIDs = [];
   let carouselIndicators = getAllCarouselIndicators();
@@ -147,6 +153,61 @@ function getAllCarouselIndicatorIDs() {
 }
 
 /*
-  TODO: add getAllCarouselIndicatorIDs(), getAllCarouselPrevControllerIDs(), 
-  getAllCarouselNextControllerIDs()
+  Get all unique next controller 'ID's found (the values of the different custom 
+  'data-ebs-carousel-indicators' attributes). Unique means there are no duplicate IDs 
+  in the returned array. All carousel elements that supposed to be grouped together 
+  share the same value (ID). 
 */
+function getAllCarouselNextControllerIDs() {
+  const carouselIDs = [];
+  let carouselNextController = getAllCarouselNextControllers();
+  // add the first id since we need an id to compare to in the for loop to check for uniqueness
+  if (carouselNextController.length > 1) {
+    carouselNextController.push(
+      carouselImages[0].getAttribute("data-ebs-carousel-next")
+    );
+  } else {
+    return carouselIDs;
+  }
+  for (let i = 1; i < carouselNextController.length; i++) {
+    let id = carouselNextController[i].getAttribute("data-ebs-carousel-next");
+    for (let j = 0; j < carouselIDs.length; j++) {
+      if (id == carouselIDs[j]) {
+        break;
+      } else {
+        carouselIDs.push(id);
+      }
+    }
+  }
+  return carouselIDs;
+}
+
+/*
+  Get all unique prev controller 'ID's found (the values of the different custom 
+  'data-ebs-carousel-indicators' attributes). Unique means there are no duplicate IDs 
+  in the returned array. All carousel elements that supposed to be grouped together 
+  share the same value (ID). 
+*/
+function getAllCarouselPrevControllerIDs() {
+  const carouselIDs = [];
+  let carouselPrevController = getAllCarouselNextControllers();
+  // add the first id since we need an id to compare to in the for loop to check for uniqueness
+  if (carouselPrevController.length > 1) {
+    carouselPrevController.push(
+      carouselImages[0].getAttribute("data-ebs-carousel-prev")
+    );
+  } else {
+    return carouselIDs;
+  }
+  for (let i = 1; i < carouselPrevController.length; i++) {
+    let id = carouselPrevController[i].getAttribute("data-ebs-carousel-prev");
+    for (let j = 0; j < carouselIDs.length; j++) {
+      if (id == carouselIDs[j]) {
+        break;
+      } else {
+        carouselIDs.push(id);
+      }
+    }
+  }
+  return carouselIDs;
+}
