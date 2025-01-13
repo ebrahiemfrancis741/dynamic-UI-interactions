@@ -119,4 +119,34 @@ function getAllCarouselImageIDs() {
       }
     }
   }
+  return carouselIDs;
 }
+
+function getAllCarouselIndicatorIDs() {
+  const carouselIDs = [];
+  let carouselIndicators = getAllCarouselIndicators();
+  // add the first id since we need an id to compare to in the for loop to check for uniqueness
+  if (carouselIndicators.length > 1) {
+    carouselIndicators.push(
+      carouselImages[0].getAttribute("data-ebs-carousel-indicators")
+    );
+  } else {
+    return carouselIDs;
+  }
+  for (let i = 1; i < carouselIndicators.length; i++) {
+    let id = carouselIndicators[i].getAttribute("data-ebs-carousel-indicators");
+    for (let j = 0; j < carouselIDs.length; j++) {
+      if (id == carouselIDs[j]) {
+        break;
+      } else {
+        carouselIDs.push(id);
+      }
+    }
+  }
+  return carouselIDs;
+}
+
+/*
+  TODO: add getAllCarouselIndicatorIDs(), getAllCarouselPrevControllerIDs(), 
+  getAllCarouselNextControllerIDs()
+*/
