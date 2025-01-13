@@ -5,6 +5,24 @@
 let carouselGroups = [];
 
 /*
+  creates a 'carousel' object that stores the html elements that are involved 
+  in a single carousel
+*/
+function createCarousel(
+  carouselImgs = [],
+  carouselControllerNext = null,
+  carouselControllerPrev = null,
+  carouselIndicators = []
+) {
+  return {
+    carouselImgs,
+    carouselControllerNext,
+    carouselControllerPrev,
+    carouselIndicators,
+  };
+}
+
+/*
   get all images that are supposed to be part of a carousel
 */
 function getCarouselImages() {
