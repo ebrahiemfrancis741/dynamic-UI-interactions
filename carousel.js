@@ -279,3 +279,33 @@ function getUniqueIDs() {
 
   return uniqueIDs;
 }
+
+/*
+  Returns an array of 'carousel' objects by getting all discovered carousel 
+  IDs and attempting to create a full 'carousel' object from the elements 
+  that contain those IDs.
+*/
+function captureCarousels() {
+  let uniqueIDs = getUniqueIDs();
+  let carouselObjects = [];
+
+  let carouselImages;
+  let carouselIndicators;
+  let carouselNextControllers;
+  let carouselPrevControllers;
+
+  for (let i = 0; i < uniqueIDs.length; i++) {
+    carouselImages = getAllCarouselImages(uniqueIDs[i]);
+    carouselIndicators = getAllCarouselIndicators(uniqueIDs[i]);
+    carouselNextControllers = getAllCarouselNextControllers(uniqueIDs[i]);
+    carouselPrevControllers = getAllCarouselPrevControllers(uniqueIDs[i]);
+    carouselObjects.push(
+      createCarousel(
+        carouselImages,
+        carouselNextControllers,
+        carouselPrevControllers,
+        carouselIndicators
+      )
+    );
+  }
+}
