@@ -308,4 +308,32 @@ function captureCarousels() {
       )
     );
   }
+  return carouselObjects;
 }
+
+/*
+  This function shows the first image in the carousel and hides the others
+*/
+function activateCarouselImage(carouselObj) {
+  if (carouselObj.carouselImgs.length > 1) {
+    for (let i = 1; i < carouselObj.carouselImgs.length; i++) {
+      carouselObj.carouselImgs[i].style.visibility = "hidden";
+    }
+  }
+}
+
+function activateAllCarouselImages() {
+  for (let i = 0; i < carousels.carouselGroups.length; i++) {
+    activateCarouselImage(carousels.carouselGroups[i]);
+  }
+}
+
+/*
+  Main function that is called in the main module
+*/
+function initCarousels() {
+  carousels.carouselGroups = captureCarousels();
+  activateAllCarouselImages();
+}
+
+export { initCarousels };
