@@ -211,3 +211,71 @@ function getAllCarouselPrevControllerIDs() {
   }
   return carouselIDs;
 }
+
+/*
+  This function exists since there can be more than 1 carousel on a single page, 
+  there will be  many different IDs for them, so we fetch them here for easier 
+  configuration later. 
+*/
+function getUniqueIDs() {
+  let carouselImgIDs = getAllCarouselImageIDs();
+  let carouselIndicatorIDs = getAllCarouselIndicatorIDs();
+  let carouselNextControllerIDs = getAllCarouselNextControllerIDs();
+  let carouselPrevControllerIDS = getAllCarouselPrevControllerIDs();
+  let uniqueIDs = [];
+
+  /*
+    Get any unique IDs from carouselImgIDs. Only loop if carouselImgIDs has more than 
+    1 id because there would be no point in looping since we already push the first element 
+    of it to our main uniqueIDs array
+  */
+  if (carouselImgIDs.length >= 1) {
+    uniqueIDs.push(carouselImgIDs[0]);
+    for (let i = 1; i < carouselImgIDs.length; i++) {
+      let currentID = carouselImgIDs[i];
+      for (let j = 0; j < uniqueIDs.length; j++) {
+        if (currentID != uniqueIDs[j]) {
+          uniqueIDs.push(currentID);
+        }
+      }
+    }
+  }
+
+  /*
+    Get any unique IDs from carouselIndicatorIDs
+  */
+  for (let i = 1; i < carouselIndicatorIDs.length; i++) {
+    let currentID = carouselIndicatorIDs[i];
+    for (let j = 0; j < uniqueIDs.length; j++) {
+      if (currentID != uniqueIDs[j]) {
+        uniqueIDs.push(currentID);
+      }
+    }
+  }
+
+  /*
+    Get any unique IDs from carouselNextControllerIDs
+  */
+  for (let i = 1; i < carouselNextControllerIDs.length; i++) {
+    let currentID = carouselNextControllerIDs[i];
+    for (let j = 0; j < uniqueIDs.length; j++) {
+      if (currentID != uniqueIDs[j]) {
+        uniqueIDs.push(currentID);
+      }
+    }
+  }
+
+  /*
+    Get any unique IDs from carouselPrevControllerIDS
+  */
+  for (let i = 1; i < carouselPrevControllerIDS.length; i++) {
+    let currentID = carouselPrevControllerIDS[i];
+    for (let j = 0; j < uniqueIDs.length; j++) {
+      if (currentID != uniqueIDs[j]) {
+        uniqueIDs.push(currentID);
+      }
+    }
+  }
+
+  return uniqueIDs;
+}
