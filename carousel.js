@@ -350,6 +350,27 @@ function carouselNextImage(carouselObj) {
 }
 
 /*
+  Shows the image at index 'carouselImgIndex' in carouselObj.carouselImgs
+*/
+function showImage(carouselObj, carouselImgIndex) {
+  if (
+    carouselImgIndex < 0 ||
+    carouselImgIndex > carouselObj.carouselImgs.length - 1
+  ) {
+    console.log("showImage(): index out of bounds");
+    return;
+  }
+
+  for (let i = 0; i < carouselObj.carouselImgs.length; i++) {
+    if (i == carouselImgIndex) {
+      carouselObj.carouselImgs[i].style.visibility = "visible";
+    } else {
+      carouselObj.carouselImgs[i].style.visibility = "hidden";
+    }
+  }
+}
+
+/*
   Main function that is called in the main module
 */
 function initCarousels() {
