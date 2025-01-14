@@ -334,7 +334,7 @@ function activateAllCarouselImages() {
 }
 
 /*
-  Changes the carousels carouselImgIndex to the 'next' index
+  Changes the carousels carouselImgIndex to the 'next' index and display it
 */
 function carouselNextImage(carouselObj) {
   // if there is only 1 image or less, this function should do nothing
@@ -342,11 +342,12 @@ function carouselNextImage(carouselObj) {
     return;
   }
   // if its the last image
-  if (carouselObj.carouselImgIndex == carouselObj.carouselImages.length - 1) {
+  if (carouselObj.carouselImgIndex == carouselObj.carouselImgs.length - 1) {
     carouselObj.carouselImgIndex = 0;
   } else {
     carouselObj.carouselImgIndex++;
   }
+  showImage(carouselObj, carouselObj.carouselImgIndex);
 }
 
 /*
@@ -376,6 +377,7 @@ function showImage(carouselObj, carouselImgIndex) {
 function initCarousels() {
   carousels.carouselGroups = captureCarousels();
   activateAllCarouselImages();
+  setInterval(carouselNextImage, 2000, carousels.carouselGroups[0]);
 }
 
 export { initCarousels };
