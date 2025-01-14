@@ -9,7 +9,7 @@ const carousels = {
 
 /*
   Creates a 'carousel' object that stores the html elements that are involved 
-  in a single carousel
+  in a single carousel, carouselImgIndex is the current image index
 */
 function createCarousel(
   carouselImgs = [],
@@ -19,6 +19,7 @@ function createCarousel(
 ) {
   return {
     carouselImgs,
+    carouselImgIndex: 0,
     carouselControllerNext,
     carouselControllerPrev,
     carouselIndicators,
@@ -302,6 +303,7 @@ function captureCarousels() {
     carouselObjects.push(
       createCarousel(
         carouselImages,
+        0,
         carouselNextControllers,
         carouselPrevControllers,
         carouselIndicators
@@ -322,9 +324,28 @@ function activateCarouselImage(carouselObj) {
   }
 }
 
+/*
+  Apply activateCarouselImage() to all carousels
+*/
 function activateAllCarouselImages() {
   for (let i = 0; i < carousels.carouselGroups.length; i++) {
     activateCarouselImage(carousels.carouselGroups[i]);
+  }
+}
+
+/*
+  Changes the carousels carouselImgIndex to the 'next' index
+*/
+function carouselNextImage(carouselObj) {
+  // if there is only 1 image or less, this function should do nothing
+  if (carouselObj.carouselImgs.length <= 1) {
+    return;
+  }
+  // if its the last image
+  if (carouselObj.carouselImgIndex == carouselObj.carouselImages.length - 1) {
+    carouselObj.carouselImgIndex = 0;
+  } else {
+    carouselObj.carouselImgIndex++;
   }
 }
 
