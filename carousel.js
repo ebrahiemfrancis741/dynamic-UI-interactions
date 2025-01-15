@@ -23,6 +23,7 @@ function createCarousel(
     carouselControllerPrev,
     carouselIndicators,
     carouselImgIndex: 0,
+    carouselTimerId: null,
   };
 }
 
@@ -305,8 +306,7 @@ function captureCarousels() {
         carouselImages,
         carouselNextControllers,
         carouselPrevControllers,
-        carouselIndicators,
-        0
+        carouselIndicators
       )
     );
   }
@@ -351,6 +351,23 @@ function carouselNextImage(carouselObj) {
 }
 
 /*
+  Changes the carousels carouselImgIndex to the 'prev' index and display it
+*/
+function carouselPrevImage(carouselObj) {
+  // if there is only 1 image or less, this function should do nothing
+  if (carouselObj.carouselImgs.length <= 1) {
+    return;
+  }
+  // if its the first image
+  if (carouselObj.carouselImgIndex == 0) {
+    carouselObj.carouselImgIndex = carouselObj.carouselImgs.length - 1;
+  } else {
+    carouselObj.carouselImgIndex--;
+  }
+  showImage(carouselObj, carouselObj.carouselImgIndex);
+}
+
+/*
   Shows the image at index 'carouselImgIndex' in carouselObj.carouselImgs
 */
 function showImage(carouselObj, carouselImgIndex) {
@@ -376,12 +393,24 @@ function showImage(carouselObj, carouselImgIndex) {
   Calls carouselNextImage() for next and carouselPrevImage() for prev
 */
 function activateCarouselBtns(carouselObj) {
-  carouselObj.carouselControllerNext[0].addEventListener(
-    "click",
-    function () {
-      carouselNextImage(carouselObj);
-    }
-  );
+  carouselObj.carouselControllerNext[0].addEventListener("click", function () {
+    carouselNextImage(carouselObj);
+    clearInterval(carouselObj.carouselTimerId);
+    carouselObj.carouselTimerId = setInterval(
+      carouselNextImage,
+      5000,
+      carouselObj
+    );
+  });
+  carouselObj.carouselControllerPrev[0].addEventListener("click", function () {
+    carouselPrevImage(carouselObj);
+    clearInterval(carouselObj.carouselTimerId);
+    carouselObj.carouselTimerId = setInterval(
+      carouselNextImage,
+      5000,
+      carouselObj
+    );
+  });
 }
 
 /*
@@ -390,7 +419,11 @@ function activateCarouselBtns(carouselObj) {
 function initCarousels() {
   carousels.carouselGroups = captureCarousels();
   activateAllCarouselImages();
-  setInterval(carouselNextImage, 5000, carousels.carouselGroups[0]);
+  carousels.carouselGroups[0].carouselTimerId = setInterval(
+    carouselNextImage,
+    5000,
+    carousels.carouselGroups[0]
+  );
   activateCarouselBtns(carousels.carouselGroups[0]);
 }
 
