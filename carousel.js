@@ -413,12 +413,22 @@ function activateCarouselBtns(carouselObj) {
   });
 }
 
+function activateCarouselIndicators(carouselObj) {
+  let carouselIndicator;
+  for (let i = 0; i < carouselObj.carouselImgs.length; i++) {
+    carouselIndicator = document.createElement("button");
+    carouselIndicator.classList.add("carousel-indicator");
+    carouselObj.carouselIndicators[0].appendChild(carouselIndicator);
+  }
+}
+
 /*
   Main function that is called in the main module
 */
 function initCarousels() {
   carousels.carouselGroups = captureCarousels();
-  activateAllCarouselImages();
+  activateCarouselIndicators(carousels.carouselGroups[0]);
+  activateAllCarouselImages(carousels.carouselGroups[0]);
   carousels.carouselGroups[0].carouselTimerId = setInterval(
     carouselNextImage,
     5000,
