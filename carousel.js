@@ -382,6 +382,12 @@ function showImage(carouselObj, carouselImgIndex) {
   for (let i = 0; i < carouselObj.carouselImgs.length; i++) {
     if (i == carouselImgIndex) {
       carouselObj.carouselImgs[i].style.visibility = "visible";
+      clearInterval(carouselObj.carouselTimerId);
+      carouselObj.carouselTimerId = setInterval(
+        carouselNextImage,
+        5000,
+        carouselObj
+      );
     } else {
       carouselObj.carouselImgs[i].style.visibility = "hidden";
     }
@@ -419,6 +425,9 @@ function activateCarouselIndicators(carouselObj) {
     carouselIndicator = document.createElement("button");
     carouselIndicator.classList.add("carousel-indicator");
     carouselObj.carouselIndicators[0].appendChild(carouselIndicator);
+    carouselIndicator.addEventListener("click", function () {
+      showImage(carouselObj, i);
+    });
   }
 }
 
