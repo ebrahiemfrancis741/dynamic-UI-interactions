@@ -19,10 +19,10 @@ function createCarousel(
 ) {
   return {
     carouselImgs,
-    carouselImgIndex: 0,
     carouselControllerNext,
     carouselControllerPrev,
     carouselIndicators,
+    carouselImgIndex: 0,
   };
 }
 
@@ -303,10 +303,10 @@ function captureCarousels() {
     carouselObjects.push(
       createCarousel(
         carouselImages,
-        0,
         carouselNextControllers,
         carouselPrevControllers,
-        carouselIndicators
+        carouselIndicators,
+        0
       )
     );
   }
@@ -372,12 +372,26 @@ function showImage(carouselObj, carouselImgIndex) {
 }
 
 /*
+  Adds event handlers for carouselControllerNext and carouselControllerPrev. 
+  Calls carouselNextImage() for next and carouselPrevImage() for prev
+*/
+function activateCarouselBtns(carouselObj) {
+  carouselObj.carouselControllerNext[0].addEventListener(
+    "click",
+    function () {
+      carouselNextImage(carouselObj);
+    }
+  );
+}
+
+/*
   Main function that is called in the main module
 */
 function initCarousels() {
   carousels.carouselGroups = captureCarousels();
   activateAllCarouselImages();
-  setInterval(carouselNextImage, 2000, carousels.carouselGroups[0]);
+  setInterval(carouselNextImage, 5000, carousels.carouselGroups[0]);
+  activateCarouselBtns(carousels.carouselGroups[0]);
 }
 
 export { initCarousels };
