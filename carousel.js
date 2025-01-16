@@ -388,6 +388,10 @@ function showImage(carouselObj, carouselImgIndex) {
         5000,
         carouselObj
       );
+      highlightCarouselIndicator(
+        carouselObj,
+        carouselObj.carouselIndicators[0].children[carouselImgIndex]
+      );
     } else {
       carouselObj.carouselImgs[i].style.visibility = "hidden";
     }
