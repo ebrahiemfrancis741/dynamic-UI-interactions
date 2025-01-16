@@ -419,6 +419,10 @@ function activateCarouselBtns(carouselObj) {
   });
 }
 
+/*
+  Adds click functionality to the individual carousel indicators. Each carousel 
+  indicator is associated with an image and when clicked switched to that image
+*/
 function activateCarouselIndicators(carouselObj) {
   let carouselIndicator;
   for (let i = 0; i < carouselObj.carouselImgs.length; i++) {
@@ -426,9 +430,22 @@ function activateCarouselIndicators(carouselObj) {
     carouselIndicator.classList.add("carousel-indicator");
     carouselObj.carouselIndicators[0].appendChild(carouselIndicator);
     carouselIndicator.addEventListener("click", function () {
+      highlightCarouselIndicator(carouselObj, this);
       showImage(carouselObj, i);
     });
   }
+}
+
+/*
+  Highlights the selected carousel indicator associated with 'carouselObj', 
+*/
+function highlightCarouselIndicator(carouselObj, carouselIndicator) {
+  for (let i = 0; i < carouselObj.carouselIndicators[0].children.length; i++) {
+    carouselObj.carouselIndicators[0].children[i].classList.remove(
+      "carousel-indicator-active"
+    );
+  }
+  carouselIndicator.classList.add("carousel-indicator-active");
 }
 
 /*
